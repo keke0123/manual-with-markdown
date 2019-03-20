@@ -8,3 +8,13 @@
 [data-num='3'] {
     border:1px solid blue;
 }
+
+#test__box__02 {
+    width:100px;
+    height:100px;
+}
+
+
+[is-actived] {
+    border:1px solid green;
+}

@@ -7,6 +7,14 @@
 * HTML
     * Custom Attr
         * ./manual/html/custom-attr/index.md
+* JavaScript
+    * Memo
+        * ./manual/javascript/memo/index.md
+* Functional Programming
+    * ./manual/functional-programming/index.md
+* jQuery
+    * Memo
+        * ./manual/jquery/meno/index.md
 * Underscore.js
     * ./manual/underscore/index.md
 * Vue
