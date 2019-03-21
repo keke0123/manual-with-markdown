@@ -27,6 +27,14 @@
             * ./manual/vue/vue-router/index.md
         * Axios
             * ./manual/vue/axios/index.md
-
+    * template
+        * vue-element-admin
+            * Memo
+                * ./manual/vue/template/vue-element-admin/Memo/index.md
 * WebPack
+* 기타
+    * 라이센스 관련
+        * ./manual/etc/license/index.md
+
+
 
