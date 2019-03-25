@@ -7,6 +7,9 @@
 * HTML
     * Custom Attr
         * ./manual/html/custom-attr/index.md
+* Css
+    * Memo
+        * ./manual/css/memo/index.md
 * JavaScript
     * Memo
         * ./manual/javascript/memo/index.md

@@ -4,6 +4,8 @@
     * sidebar
     * icon
     * element-ui table
+        * element-ui 의 table 간략 사용법
+        * table 선택 후 삭제
     * build
 
 ---
@@ -68,6 +70,27 @@ json 데이타 값은 받아왔을때 전부 string type 이기 때문에 정렬
 
 파싱된 date 는 사람이 정확한 날짜를 알아보기 힘들기 때문에 정렬 방식에 쓰는 데이타는 parseDate 로 사용하였구, table 에 찍히는 custom data 는 기존의 object 안에 date 값을 사용하였다.
 
+> table 선택 후 삭제
+
+아래와 같이 테이블에 select box 를 만들어서 버튼을 눌렀을때 삭제 하는 방법이다.
+
+![table-delete-01](./img/table-delete-01.png)
+
+우선 element-ui 에서 제공하는 select box 와 select box 를 눌렀을때 함수를 호출해주는 방식을 사용하려면 아래의 그림과 같이 table 에는 selection-change 라는 이벤트를 만들고 type 이 selection 이라는 column 을 만들면 된다.
+
+![table-delete-02](./img/table-delete-02.png)
+
+selection event 에선 선택된 값을 변수에 저장 시켜주기만 하였다.
+val 로는 체크한 값 전체가 array 로 넘어온다.
+
+![table-delete-03](./img/table-delete-03.png)
+
+버튼을 눌렀을때 함수를 호출하여 selectedData 에 저장된 배열과 현재 테이블에 뿌려주는 list 와 비교하여 id 값이 같을때 object 를 지워주는 방식을 사용하여 테이블의 삭제를 진행하였다. 나름의 최적화를 위해서 맞는 id 값이 있을때 selectedData 의 배열도 같이 지우도록 하였다.
+
+![table-delete-04](./img/table-delete-04.png)
+
+---
+
 ## Build
 
 > build 시 assets 의 파일 변환 관련
@@ -76,4 +99,6 @@ json 데이타 값은 받아왔을때 전부 string type 이기 때문에 정렬
 build 시 webpack.prod.conf.js 의 설정 내용에 따라 /dist/js/chunk-[hash값]으로 변환된다.
 
 ![build-assets 관련](./img/build-assets.PNG)
+
+---
 

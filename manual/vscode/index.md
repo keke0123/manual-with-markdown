@@ -1,5 +1,11 @@
 # VsCode
 
+* ## 목록
+    * VsCode ShortCut
+    * VsCode Tip
+
+---
+
 * ## VsCode ShortCut
     * ### 셀렉션 축소 확장
         * Mac : `ctrl + shift + cmd + left` or `ctrl + shift + cmd + right`
@@ -23,3 +29,16 @@
     * ### 모든 심볼 찾기
         * `shift + F12`
     
+---
+
+## VsCode Tip
+
+> 정규식으로 단어 찾아서 전부 지우기
+
+아래 그림처럼 정규식 사용 체크해주고 정규식으로 검출해서 특정 단어를 지울수 있다.
+
+이걸 이용하면 test class 만들고 필요할때 삭제해서 넘겨줘도 괜찮을거 같다.
+
+![img-01](./img/1.png)
+
+

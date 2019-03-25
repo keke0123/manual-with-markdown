@@ -601,7 +601,53 @@ _.each({one:1, two:2, three: 3}, alert);
 
 ### uniqueld
 
-> 
+> unique Id 를 생성합니다. prefix 를 받으면 prefix 에 ID 를 붙여서 반환합니다.
+
+---
+
+### escape
+
+> HTML 에 삽입가능한 문자열로 반환하여 변환합니다.
+
+---
+
+### unescape
+
+> escape 함수의 반대로 escape 변환된 문자를 재변환하여 반환합니다.
+
+---
+
+### result
+
+> 인자로 받는 이름을 가진 객체 값이 함수이면 해당 함수를 실행하여 값을 반환한다.
+
+---
+
+### now
+
+> 현재 시간을 정수형 timestamp 로 반환한다.
+
+---
+
+### template
+
+> 템플릿 포멧이 적용된 함수를 반환한다. <%= %> 는 변수나 함수호출, <% %> javascript 코드 호출, <%- %> 는 HTML-escape 된 문자를 처리한다.
+
+---
+
+## `Chaining`
+
+---
+
+### chain
+
+> value 가 호출되기 전까지 계속해서 wrapped 객체를 반환 받도록 한다.
+
+---
+
+### value
+
+> wrapped 객체의 값을 반환하다.
 
 
 
