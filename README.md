@@ -20,6 +20,8 @@
         * ./manual/jquery/meno/index.md
 * Underscore.js
     * ./manual/underscore/index.md
+    * underscore_example (underscore example test page)
+        * ./manual/underscore/underscore_example/index.html
 * Vue
     * Vue Documents
         * ./manual/vue/index.md
