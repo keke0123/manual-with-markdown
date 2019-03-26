@@ -1,7 +1,4 @@
 
-let test_array_01 = [1, 2, 3];
-let test_array_02 = [[0, 1], [2, 3], [4, 5]];
-let test_array_03 = [1, 2, 3, 4, 5, 6];
 let test_array_04 = [
     {
         num: 1,
@@ -24,18 +21,13 @@ let test_array_04 = [
         name: '범',
     }
 ];
-let test_array_05 = [2, 5, 4];
-let test_array_06 = [null, 0, 'yes', false];
-let test_array_07 = [1.2, 2.4, 2.6];
-let test_array_08 = ['one', 'two', 'three'];
-let test_object_01 = {one:'1', two:'2', three:'3'};
 
 /*
     collections
 */
 // each
 test_each = function(){
-    _.each(test_array_01, function(value, index, object){
+    _.each([1, 2, 3], function(value, index, object){
         console.log('index');
         console.log(index);
         console.log('value');
@@ -44,7 +36,7 @@ test_each = function(){
         console.log(object);
     });
     
-    _.each(test_object_01, function(value, index, object){
+    _.each({one:'1', two:'2', three:'3'}, function(value, index, object){
         console.log('index');
         console.log(index);
         console.log('value');
@@ -56,7 +48,7 @@ test_each = function(){
 
 // map
 test_map = function(){
-    let temp_object = _.map(test_array_01, function(value, index, object){
+    let temp_object = _.map([1, 2, 3], function(value, index, object){
         console.log('value');
         console.log(value);
         console.log('index');
@@ -68,7 +60,7 @@ test_map = function(){
     console.log('temp_object');
     console.log(temp_object);
     console.log('-----------------------------------------------');
-    temp_object = _.map(test_object_01, function(value, key, object){
+    temp_object = _.map({one:'1', two:'2', three:'3'}, function(value, key, object){
         console.log('value');
         console.log(value);
         console.log('key');
@@ -87,7 +79,7 @@ test_map = function(){
 
 // reduce
 test_reduce = function(){
-    let temp_sum = _.reduce(test_array_01, function(sum, value, index, object){
+    let temp_sum = _.reduce([1, 2, 3], function(sum, value, index, object){
         console.log('sum');
         console.log(sum);
         console.log('value');
@@ -104,7 +96,7 @@ test_reduce = function(){
 
 // reduceRight
 test_reduceRight = function(){
-    let temp_sum = _.reduceRight(test_array_02, function(sum, value, index, object){
+    let temp_sum = _.reduceRight([[0, 1], [2, 3], [4, 5]], function(sum, value, index, object){
         console.log('sum');
         console.log(sum);
         console.log('value');
@@ -121,7 +113,7 @@ test_reduceRight = function(){
 
 // find
 test_find = function(){
-    let temp_item = _.find(test_array_03, function(value, index, object){
+    let temp_item = _.find([1, 2, 3, 4, 5, 6], function(value, index, object){
         console.log('value');
         console.log(value);
         console.log('index');
@@ -137,7 +129,7 @@ test_find = function(){
 
 // filter
 test_filter = function(){
-    let temp_item = _.filter(test_array_03, function(value, index, object){
+    let temp_item = _.filter([1, 2, 3, 4, 5, 6], function(value, index, object){
         console.log('value');
         console.log(value);
         console.log('index');
@@ -169,7 +161,7 @@ test_where = function(){
 
 // reject
 test_reject = function(){
-    let temp_object = _.reject(test_array_03, function(value, index, object){
+    let temp_object = _.reject([1, 2, 3, 4, 5, 6], function(value, index, object){
         console.log('value');
         console.log(value);
         console.log('index');
@@ -184,7 +176,7 @@ test_reject = function(){
 
 // every
 test_every = function(){
-    let temp_boolean = _.every(test_array_05, function(value, index, object){
+    let temp_boolean = _.every([2, 5, 4], function(value, index, object){
         console.log('value');
         console.log(value);
         console.log('index');
@@ -199,10 +191,10 @@ test_every = function(){
 
 // some / 하나라도 참이면 true
 test_some = function(){
-    let temp_boolean = _.some(test_array_06);
+    let temp_boolean = _.some([null, 0, 'yes', false]);
     console.log('temp_boolean');
     console.log(temp_boolean);
-    temp_boolean = _.some(test_array_05, function(value){
+    temp_boolean = _.some([2, 5, 4], function(value){
         return value % 6 === 0;
     });
     console.log(temp_boolean);
@@ -210,7 +202,7 @@ test_some = function(){
 
 // contains / list 가 value 값을 포함하고 있으면 true
 test_contains = function(){
-    let temp_boolean = _.contains(test_array_01, 3);
+    let temp_boolean = _.contains([1, 2, 3], 3);
     console.log('temp_boolean');
     console.log(temp_boolean);
 };
@@ -243,7 +235,7 @@ test_max = function(){
 
 // min
 test_min = function(){
-    let temp_object = _.min(test_array_03);
+    let temp_object = _.min([1, 2, 3, 4, 5, 6]);
     console.log('temp_object');
     console.log(temp_object);
     temp_object = _.min(test_array_04, function(value){
@@ -257,7 +249,7 @@ test_min = function(){
 
 // sortBy
 test_sortBy = function(){
-    let temp_object = _.sortBy(test_array_03, function(value){
+    let temp_object = _.sortBy([1, 2, 3, 4, 5, 6], function(value){
         return Math.sin(value);
     });
     console.log('temp_object');
@@ -266,12 +258,12 @@ test_sortBy = function(){
 
 // groupBy
 test_groupBy = function(){
-    let temp_object = _.groupBy(test_array_07, function(value){
+    let temp_object = _.groupBy([1.2, 2.4, 2.6], function(value){
         return Math.floor(value);
     });
     console.log('temp_object');
     console.log(temp_object);
-    temp_object = _.groupBy(test_array_08, 'length'
+    temp_object = _.groupBy(['one', 'two', 'three'], 'length'
     );
     console.log('temp_object');
     console.log(temp_object);
@@ -291,7 +283,7 @@ test_indexBy = function(){
 
 // countBy
 test_countBy = function(){
-    let temp_object = _.countBy(test_array_03, function(value){
+    let temp_object = _.countBy([1, 2, 3, 4, 5, 6], function(value){
         return value % 2 == 0 ? 'even' : 'odd';
     });
     console.log('temp_object');
@@ -300,17 +292,17 @@ test_countBy = function(){
 
 // shuffle
 test_shuffle = function(){
-    let temp_object = _.shuffle(test_array_03);
+    let temp_object = _.shuffle([1, 2, 3, 4, 5, 6]);
     console.log('temp_object');
     console.log(temp_object);
 };
 
 // sample
 test_sample = function(){
-    let temp_object = _.sample(test_array_03);
+    let temp_object = _.sample([1, 2, 3, 4, 5, 6]);
     console.log('temp_object');
     console.log(temp_object);
-    temp_object = _.sample(test_array_03, 3);
+    temp_object = _.sample([1, 2, 3, 4, 5, 6], 3);
     console.log('temp_object');
     console.log(temp_object);
 };
@@ -326,13 +318,13 @@ test_toArray = function(){
 
 // size
 test_size = function(){
-    console.log(_.size(test_array_03));
-    console.log(_.size(test_object_01));
+    console.log(_.size([1, 2, 3, 4, 5, 6]));
+    console.log(_.size({one:'1', two:'2', three:'3'}));
 };
 
 // partition
 test_partition = function(){
-    let temp_object = _.partition(test_array_03, function(value){
+    let temp_object = _.partition([1, 2, 3, 4, 5, 6], function(value){
         return value % 2 == 0;
     });
     console.log(temp_object);
@@ -349,21 +341,106 @@ test_compact = function(){
 */
 // first
 test_first = function(){
-    let temp_item = _.first(test_array_03);
+    let temp_item = _.first([1, 2, 3, 4, 5, 6]);
     console.log(temp_item);
-    temp_item = _.first(test_array_03, 2);
+    temp_item = _.first([1, 2, 3, 4, 5, 6], 2);
     console.log(temp_item);
 };
 
 // initial
 test_initial = function(){
-    let temp_object = _.initial(test_array_03);
+    let temp_object = _.initial([1, 2, 3, 4, 5, 6]);
     console.log(temp_object);
-    temp_object = _.initial(test_array_03, 2);
+    temp_object = _.initial([1, 2, 3, 4, 5, 6], 2);
     console.log(temp_object);
 };
 
+// last
 test_last = function(){
-    let temp_object = _.last(test_array_03);
-    
+    let temp_object = _.last([1, 2, 3, 4, 5, 6]);
+    console.log(temp_object);
+    temp_object = _.last([1, 2, 3, 4, 5, 6], 2);
+    console.log(temp_object);
+};
+
+// rest
+test_rest = function(){
+    let temp_object = _.rest([1, 2, 3, 4, 5, 6]);
+    console.log(temp_object);
+    temp_object = _.rest([1, 2, 3, 4, 5, 6], 2);
+    console.log(temp_object);
+};
+
+// flatten
+// 조금 오작동이 있는듯 하다 3번과 4번 수행을 보면 알 수 있다.
+test_flatten = function(){
+    let temp_object = _.flatten([1, [2], [3, [[4]]]]);
+    console.log(temp_object);
+    temp_object = _.flatten([1, [2], [3, [[4]]]], true);
+    console.log(temp_object);
+    temp_object = _.flatten(temp_object, true);
+    console.log(temp_object);
+    temp_object = _.flatten(temp_object, true);
+    console.log(temp_object);
+};
+
+// without
+test_without = function(){
+    let temp_object = _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
+    console.log(temp_object);
+};
+
+// union / 합집합
+test_union = function(){
+    let temp_object = _.union([1,2,3], [101, 2, 1, 10], [2, 1]);
+    console.log(temp_object);
+};
+
+// intersection / 교집합
+test_intersection = function(){
+    let temp_object = _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]);
+    console.log(temp_object);
+};
+
+// difference / 차집합
+test_difference = function(){
+    let temp_object = _.difference([1, 2, 3, 4, 5], [5, 2, 10]);
+    console.log(temp_object);
+};
+
+// uniq / 중복되는 값 삭제하고 각 1개씩만
+test_uniq = function(){
+    let temp_object = _.uniq([1,2,1,4,1,3]);
+    console.log(temp_object);
+};
+
+// zip / 배열의 인덱스를 기준으로 묶어서 배열을 만들어 준다. [array(1), array(2), array(3)] 이런 형식
+test_zip = function(){
+    let temp_object = _.zip(['moe', 'larry', 'curly'], [30, 40, 50], [true, false, false]);
+    console.log(temp_object);
+};
+
+// unzip / zip 으로 묶은걸 풀어준다.
+test_unzip = function(){
+    let temp_object = _.unzip([['moe', 30, true], ['larry', 40, false], ['curly', 50, false]]);
+    console.log(temp_object);
+};
+
+// object / 배열을 오브젝트로 만들어 주는 함수
+test_object = function(){
+    let temp_object = _.object(['moe', 'larry', 'curly'], [30, 40, 50]);
+    console.log(temp_object);
+    temp_object = _.object([['moe', 30], ['larry', 40], ['curly', 50]]);
+    console.log(temp_object);
+};
+
+let kindergarten = ['tyrone', 'elie', 'aidan', 'sam', 'katrina', 'billie', 'timmy']
+
+// chunk
+test_chunk = function(){
+    let temp_object = _.chunk(_.shuffle(kindergarten), 2);
+    console.log(temp_object);
 }
+
+
+
