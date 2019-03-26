@@ -22,6 +22,9 @@ let test_array_04 = [
     }
 ];
 
+let kindergarten = ['tyrone', 'elie', 'aidan', 'sam', 'katrina', 'billie', 'timmy']
+
+
 /*
     collections
 */
@@ -336,6 +339,7 @@ test_compact = function(){
     console.log(temp_object);
 };
 
+
 /*
     Arrays
 */
@@ -434,13 +438,163 @@ test_object = function(){
     console.log(temp_object);
 };
 
-let kindergarten = ['tyrone', 'elie', 'aidan', 'sam', 'katrina', 'billie', 'timmy']
 
-// chunk
+// chunk / random 으로 섞은뒤에 짤라서 배열을 만들수 있다.
 test_chunk = function(){
     let temp_object = _.chunk(_.shuffle(kindergarten), 2);
     console.log(temp_object);
+};
+
+// indexOf / value 를 배열에서 찾아서 index 를 알려준다.
+test_indexOf = function(){
+    let temp_object = _.indexOf([1,2,3,2], 2);
+    console.log(temp_object);
+};
+
+// lastIndexOf / 
+test_lastIndexOf = function(){
+    let temp_object = _.lastIndexOf([1,2,3,1,2,3], 2);
+    console.log(temp_object);
+};
+
+// sortedIndex
+test_sortedIndex = function(){
+    let temp_object = _.sortedIndex([10, 20, 30, 40, 50], 35);
+    console.log(temp_object);
+    let stooges = [{name: 'moe', age: 40}, {name: 'curly', age: 60}];
+    temp_object = _.sortedIndex(stooges, {name:'larry', age: 50}, 'age');
+    console.log(temp_object);
+};
+
+// findIndex / 만약에 못찾으면 return -1
+test_findIndex = function(){
+    let temp_object = _.findIndex([4, 6, 8, 12], function(value, index, array){
+        console.log('value');
+        console.log(value);
+        console.log('index');
+        console.log(index);
+        console.log('array');
+        console.log(array);
+        return value % 6 === 0;
+    });
+    console.log(temp_object);
 }
+
+// findLastIndex
+test_findLastIndex = function(){
+    let temp_object = _.findLastIndex([4, 6, 8, 12], function(value, index, array){
+        console.log('value');
+        console.log(value);
+        console.log('index');
+        console.log(index);
+        console.log('array');
+        console.log(array);
+        return value % 8 === 0;
+    });
+    console.log(temp_object);
+}
+
+// range
+test_rage = function(){
+    let temp_object = _.range(10);
+    console.log(temp_object);
+    temp_object = _.range(1,11);
+    console.log(temp_object);
+    temp_object = _.range(0,30,5);
+    console.log(temp_object);
+    temp_object = _.range(0,-10,-1);
+    console.log(temp_object);
+    temp_object = _.range(0);
+    console.log(temp_object);
+}
+
+
+/*
+    Function / 이쪽은 진짜 잘 이해 안간다.
+*/
+// bind
+test_bind = function(){
+    let func = function(greeting){
+        console.log(greeting + " : " + this.name);
+        return greeting + " : " + this.name;
+    }
+    func = _.bind(func, {name:'moe'}, 'hi');
+    func();
+};
+
+// bindAll
+test_bindAll = function(){
+    let buttonView = {
+        label : 'underscore',
+        onClick : function(){
+            alert('clicked : '+this.label);
+        },
+        onHover: function(){
+            console.log('hovering : '+this.label);
+        }
+    };
+    _.bindAll(buttonView, 'onClick', 'onHover');
+};
+
+// partial
+test_partial = function(){
+    let subtract = function(a, b) {
+        return b - a;
+    }
+    let sub5 = _.partial(subtract, 5);
+    console.log(sub5(20));
+};
+
+// memoize
+test_memoize = function(){
+    fibonacci = _.memoize(function(n){
+
+        return n > 2 ? n : fibonacci(n-1) + fibonacci(n-2);
+    });
+    console.log(fibonacci(5));
+};
+
+// delay
+test_delay = function(){
+    let log = _.bind(console.log, console);
+    _.delay(log, 1000, 'logged later');
+};
+
+// defer
+test_defer = function(){
+    _.defer(function(){
+        alert('deferred');
+    });
+};
+
+// throttle
+test_throttle = function(){
+    let throttled = _.throttle(1000, 100);
+    $(window).scroll(throttled);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
