@@ -554,24 +554,169 @@ test_memoize = function(){
     console.log(fibonacci(5));
 };
 
-// delay
+// delay 
 test_delay = function(){
     let log = _.bind(console.log, console);
     _.delay(log, 1000, 'logged later');
 };
 
-// defer
+// defer / call stack 의 내용이 전부 처리되면 실행시킨다. 
 test_defer = function(){
     _.defer(function(){
         alert('deferred');
     });
 };
 
-// throttle
+// throttle / 지정된 시간내에 최대 한번만 호출된다.
 test_throttle = function(){
-    let throttled = _.throttle(1000, 100);
+    let temp_function = function(){
+        console.log('test success');
+    }
+    let throttled = _.throttle(temp_function, 2000);
+
     $(window).scroll(throttled);
 };
+
+// debounce / 연속 호출되는 한 트리거되지 않는 함수를 돌려준다.
+test_debounce = function(){
+    let lazyLayout = _.debounce(function(){
+        console.log('success')
+    } , 1000);
+    $(window).resize(lazyLayout);
+};
+
+// once / 최초 한번만 실행되는 함수를 리턴해줌
+test_once = function(){
+    let initialize = _.once(function(){
+        console.log('just one');
+    });
+    initialize(); // 이것만 실행된다.
+    initialize();
+};
+
+// after / n 번 호출된 이후에 실행되는 함수를 리턴해준다.
+test_after = function(){
+    let renderNotes = _.after(2, function(){
+        console.log('called');
+    });
+    renderNotes();
+    renderNotes(); // 여기서 실행된다.
+};
+
+// before / n 번 횟수제한이 있는 함수를 리턴해준다.
+test_before = function(){
+    let monthlyMeeting = _.before(3, function(){
+        console.log('count');
+    });
+    monthlyMeeting();   // 실행
+    monthlyMeeting();   // 실행
+    monthlyMeeting();   // 여기부턴 실행안됨
+    monthlyMeeting();
+};
+
+// wrap / wrapping 된 함수를 리턴해준다.
+test_wrap = function(){
+    let hello = function(name){
+        return "hello " + name;
+    }
+    hello = _.wrap(hello, function(func){
+        return "before, " + func('moe') + ", after";
+    });
+    console.log(hello());
+};
+
+// negate / 무슨 말인지 모르겠다.
+test_negate = function(){
+    let isFalsy = _.negate(Boolean);
+    let temp_object = _.find([-2, -1, 0, 1, 2], isFalsy);
+    console.log(temp_object);
+};
+
+// compose / 함수의 반환 값을 인수에 취하는 합성 함수를 리턴 / x(), y() => function(x(y()))
+test_compose = function(){
+    let greet = function(name){
+        return 'hi : ' + name; 
+    };
+    let exclaim = function(statement){
+        return statement.toUpperCase() + "!";
+    };
+    let welcome = _.compose(greet, exclaim);
+    console.log(welcome('moe'));
+};
+
+// restArguments / 무슨 말인지 모르겟다.
+test_restArguments = function(){
+    let raceResult = _.restArguments(function(gold, silver, bronze, everyoneElse){
+        _.each(everyoneElse, sendConsolations);
+    });
+};
+
+
+/*
+    objects
+*/
+// keys / object 의 key 만 따로 배열로 만들어 준다.
+test_keys = function(){
+    let temp_object = _.keys({one: 1, two: 2, three: 3});
+    console.log(temp_object);
+};
+
+// allKeys / object 의 key 값을 배열로 만들어 준다 / keys 랑 차이가 머지?
+test_allKeys = function(){
+    function Stooge(name){
+        this.name = name;
+    }
+    Stooge.prototype.silly = true; // prototype 은 console 로 다른곳에 찍히는데 그냥 option 이라고 생각하면 되나?
+    console.log(new Stooge("Moe"));
+    let temp_object = _.allKeys(new Stooge("Moe"));
+    console.log(temp_object);
+};
+
+// values / object 의 value 만 따로 배열로 만들어 준다.
+test_values = function(){
+    let temp_object = _.values({one: 1, two: 2, three: 3});
+    console.log(temp_object);
+};
+
+// mapObject / object 를 쭉 배열처럼 순회하며 value 값을 조정하는듯 하다.
+test_mapObject = function(){
+    let temp_object = _.mapObject({start: 5, end: 12}, function(val, key){
+        return val + 5;
+    });
+    console.log(temp_object);
+};
+
+// pairs / key 와 value 를 짝지어서 배열로 만들어 리턴시켜 준다.
+test_pairs = function(){
+    let temp_object = _.pairs({one: 1, two: 2, three: 3});
+    console.log(temp_object);
+};
+
+// invert / key 값과 value 값을 바꾼 object 를 리턴시켜 준다.
+test_invert = function(){
+    let temp_object = _.invert({Moe:'Moses', Larry:'Louis', Curly:'Jerome'});
+    console.log(temp_object);
+};
+
+// create / 잘 이해 안된다. / 거기다 왜 쓰는 거지?
+test_create = function(){
+    function Stooge(name){
+        this.name = name;
+    }
+    let moe = _.create(Stooge.prototype, {name: "Moe"});
+    console.log(moe);
+};
+
+// functions / object 안의 method 이름을 배열로 변환시켜 리턴시켜 준다.
+test_functions = function(){
+    let temp_object = _.functions(_);
+    console.log(temp_object);
+};
+
+// findKey
+test_findKey = function(){
+    
+}
 
 
 
