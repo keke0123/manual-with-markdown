@@ -713,10 +713,126 @@ test_functions = function(){
     console.log(temp_object);
 };
 
-// findKey
+// findKey / value 와 key 를 함수 인자로 받아서 찾는데 활용하는듯 하다.
 test_findKey = function(){
-    
+    let json = {
+        "images/mike.jpg" : "images/mike.12345.jpg",
+        "images/joe.jpg" : "images/joe.axcvas.jpg",
+        "images/mary.jpg" : "images/mary.mndfkndf.jpg",
+        "images/jane.jpg" : "images/jane.dfad34.jpg",
+    };
+    let fileToSearch = "joe.jpg";
+    let key = _.findKey(json, function(value, key) {
+        return key.indexOf(fileToSearch) >= 0;
+    });
+    let hash = key? json[key].split('.')[1] : undefined;
+    console.log(key);
+};
+
+// extend / 2개의 object 를 합친다. 왼쪽 우선?
+test_extend = function(){
+    let temp_object = _.extend({name: "moe"}, {age: 50});
+    console.log(temp_object);
+};
+
+// extendOwn / ?
+test_extendOwn = function(){
+
+};
+
+// pick / 선택한 인자만 골라서 object 를 다시 만든다.
+test_pick = function(){
+    let temp_object = _.pick({name: 'moe', age: 50, userid: 'moe1'}, 'name', 'age');
+    console.log(temp_object);
+    temp_object = _.pick({name: 'moe', age: 50, userid: 'moe1'}, function(value, key, object){
+        return _.isNumber(value);
+    });
+    console.log(temp_object);
+};
+
+// omit / 선택한 인자를 생략하고 object 를 다시 만든다.
+test_omit = function(){
+    let temp_object = _.omit({name: 'moe', age: 50, userid: 'moe1'}, 'userid');
+    console.log(temp_object);
+    temp_object = _.omit({name:'moe', age:50, userid:'moe1'}, function(value, key, object){
+        return _.isNumber(value);
+    });
+    console.log(temp_object);
+};
+
+// defaults / defaults 값은 
+test_defaults = function(){
+    let iceCream = {flavor: 'chocolate'};
+    let temp_object = _.defaults(iceCream, {flavor: 'vanilla', sprinkles: 'lots'});
+    console.log(temp_object);
+};
+
+// clone / 단순히 object 복사 하는 건가?
+test_clone = function(){
+    let temp_object = _.clone({name: 'moe'});
+    console.log(temp_object);
+};
+
+// tap / 사용하면 중간에 return 받은 값을 잠깐 띄울수 있는 것 같다
+test_tap = function(){
+    let temp_object = _.chain([1, 2, 3, 200])
+        .filter(function(num){ return num % 2 == 0; })
+        .tap(alert)
+        .map(function(num){ return num*num })
+        .value();
+    console.log(temp_object);
+};
+
+// has / key 값을 검색한다.
+test_has = function(){
+    let temp_object = _.has({a: 1, b: 2, c: 3}, 'b');
+    console.log(temp_object);
+};
+
+// property / 배열로 타고 들어가서 value 값을 가져온다.
+test_property = function(){
+    let stooge = {name: 'moe'};
+    console.log('moe' === _.property('name')(stooge));
+    stooges = {
+        moe: {
+            fears: {
+                worst: 'Spiders'
+            }
+        },
+        curly: {
+            fears: {
+                worst: 'Moe'
+            }
+        }
+    };
+    let curlyWorstFear = _.property(['curly', 'fears', 'worst']);
+    console.log(curlyWorstFear(stooges));
+};
+
+// propertyOf / 단순히 key 값 넣는곳이랑 object 넣는 곳만 바뀐건가?
+test_propertyOf = function(){
+    let stooge = {name: 'moe'};
+    console.log(_.propertyOf(stooge)('name'));
+};
+
+// matcher / 비교해서 맞으면 true 값을 던져주는 함수를 만들어서 리턴시켜 준다.
+test_matcher = function(){
+    let ready = _.matcher({selected: true, visible: true});
+    console.log(ready);
+    let readyToGoList = _.filter([{selected: true, visible: true}, {selected: true, visible: true, name: false}, {selected: true, visible: false}], ready);
+    console.log(readyToGoList);
+};
+
+// isEqual
+test_isEqual = function(){
+    let stooge = {name: 'moe', luckyNumbers}
 }
+
+
+
+
+
+
 
 
 
