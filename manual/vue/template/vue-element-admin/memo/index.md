@@ -89,6 +89,12 @@ val 로는 체크한 값 전체가 array 로 넘어온다.
 
 ![table-delete-04](./img/table-delete-04.png)
 
+> 동적 테이블 할당을 위한 key array 만드는 방법
+
+~~~javascript
+this.listKeys = Object.keys(this.tempData.list[0])
+~~~
+
 ---
 
 ## Build
@@ -101,4 +107,12 @@ build 시 webpack.prod.conf.js 의 설정 내용에 따라 /dist/js/chunk-[hash�
 ![build-assets 관련](./img/build-assets.PNG)
 
 ---
+
+## etc
+
+> state attr 변경법
+
+sortable 이라는 attr 을 제어하고 싶다면 sortable 에 bind 시키고 true, flase 값을 변수로 주면 제어 가능해 진다.
+
+![state-attr-change](./img/state-attr-change-01.png)
 
