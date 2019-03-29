@@ -95,6 +95,98 @@ val 로는 체크한 값 전체가 array 로 넘어온다.
 this.listKeys = Object.keys(this.tempData.list[0])
 ~~~
 
+> 동적 테이블 만드는 법
+
+element ui 에서 제공하는 table 요소를 사용해 동적 테이블을 구성하기 위해선 data 를 담고 있는 object list 와 각 object 의 key 값의 option 을 담을 object list 가 필요하다
+
+~~~javascript
+// 예제
+dataArray = [
+    {
+        id: 1,
+        name: 'keke',
+        date: '2019-01-23'
+    },
+    {
+        id: 2,
+        name: 'haha',
+        date: '2019-02-01'
+    }
+    ...
+]
+
+optionArray = [
+    {
+        attr: 'id',
+        align: 'center',
+        width: '200',
+        isShow: true
+    },
+    {
+        attr: 'name',
+        align: 'left',
+        width: '100',
+        isShow: true
+    }
+    ...
+]
+~~~
+
+위와 같은 object 두개를 바탕으로 동적 테이블을 구성하려면 아래의 그림과 같이 데이터를 바인딩 해주면 된다. 
+
+우선 기본적으로 table 에 dataArray 를 binding 해주면 이 값을 바탕으로 테이블을 구성한다.
+
+그리고 다음으로 option 을 for 문으로 돌려서 table 의 정렬 규칙을 만들어 주면 된다. 예를 들어 id 값을 보여주기 싫다면 isShow = false 값을 넣고, v-if 에 false 값이 입력되어 column 요소가 출력이 안되게 하면 된다.
+
+
+![dynamic-table-01](./img/dynamic-table-01.png)
+
+data 를 서버에서 받아올때마다 settingKey 라는 함수가 호출되도록 하고, settingKey 라는 함수에서 optionArray 의 값을 조작해 주면 된다.
+
+![dynamic-table-02](./img/dynamic-table-02.png)
+
+아래 그림과 같이 testDefaultOption 에 기본 설정값을 구성하고 오버라이딩 하는 방식으로 데이타를 바꿔준다.
+
+![dynamic-table-03](./img/dynamic-table-03.png)
+
+---
+
+## Axios 기본
+
+<!-- rest api 형식이라면 주소가 아래와 같은 형식으로 만들어 진다.
+
+~~~javascript
+let id = 'keke'
+let key = '1'
+
+const url_list = `http://example.com/table/list/${key}/keyword`
+const url_delete = `http://example.com/table/list/${key}/keyword/${id}/delete`
+~~~ -->
+
+페이지가 만들어 질때, 서버에서 데이타를 받아온다. async function 을 사용하기 위해선 promise 타입을 리턴해줘야 한다. 저 뒤에 then 과 catch 를 붙이면 undefined 값으로 동작되니 주의!
+
+![axios-manual-01](./img/axios-manual-01.png)
+
+데이타를 받아오면서 optionArray 를 세팅해주고, 세팅이 끝나면 dataArray 를 세팅해준다.
+
+하지만 일련의 동작이 데이타를 받은 시점에서 순차적으로 진행되기를 원하기 때문에 async function 을 사용해서 아래 함수의 동작은 동기 처리 시켰다.
+
+![axios-manual-02](./img/axios-manual-02.png)
+
+데이터를 지워줄때는 get 방식으로 파라미터에 담고 가도 되지만, id 값과 password 등 중요한 값을 담고 갈수도 있기 때문에 post 방식으로 body 에 담아 간다. 아래 그림의 list 에 담아 가는 값은 아래와 같이 id 값과 지울 table 의 index 값을 담은 array object 이다.
+~~~javascript
+{ 
+    id: 'hbJung',
+    list: [ 0, 1 ] 
+}
+~~~
+
+![axios-manual](./img/axios-manual-03.png)
+
+아래의 그림은 post 지울 내용을 post 로 넘겨주고 서버에서 success 신호를 날려주었을때 list 를 지워주는 동작이다.
+
+![axios-manual](./img/axios-manual-04.png)
+
 ---
 
 ## Build
