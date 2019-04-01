@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #testBtn1 {
+            height: 50px;
+            width: 10%;
+            border: 2px solid tomato;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Echarts Test Page</h1>
+        <!-- prepare a DOM container with width and height -->
+        <div id="main1" style="width: 600px;height:400px;"></div>   
+        <div id="main2" style="width: 600px;height:400px;"></div>
+        <div id="main3" style="width: 600px;height:400px;"></div>
+        <div id="main4" style="width: 600px;height:400px;"></div>
+    </div>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/lodash.js"></script>
+    <script src="./js/echarts.js"></script>
+    <script src="./js/echarts_test.js"></script>
+    <!-- custom thema -->
+    <script src="./vintage.js"></script>
+    <script>
+    var chart1 = echarts.init(document.getElementById('main1'), 'light');
+    chart1.setOption({
+        series: {
+            type: 'pie',
+            data: [
+                {name: 'A', value: 1212},
+                {name: 'B', value: 2323},
+                {name: 'C', value: 1919}
+            ]
+        }
+    });
+    // custom thema vintage
+    var chart2 = echarts.init(document.getElementById('main2'), 'vintage');
+    chart2.setOption({
+        series: {
+            type: 'pie',
+            data: [
+                {name: 'A', value: 1212},
+                {name: 'B', value: 2323},
+                {name: 'C', value: 1919}
+            ]
+        }
+    });
+    </script>
+</body>
+</html>

@@ -13,15 +13,25 @@
 * JavaScript
     * Memo
         * ./manual/javascript/memo/index.md
+    * library
+        * AmCharts
+            * ./manual/javascript/amcharts/index.html
 * Functional Programming
     * ./manual/functional-programming/index.md
 * jQuery
     * Memo
-        * ./manual/jquery/meno/index.md
+        * ./manual/jquery/memo/index.md
+* echarts
+    * Memo
+        * ./manual/echarts/memo/index.md
 * Underscore.js
     * ./manual/underscore/index.md
     * underscore_example (underscore example test page)
         * ./manual/underscore/underscore_example/index.html
+* Lodash
+    * ./manual/lodash/index.md
+    * lodash_example (lodash example test page)
+        * ./manual/lodash/lodash_example/index.html
 * Vue
     * Vue Documents
         * ./manual/vue/index.md

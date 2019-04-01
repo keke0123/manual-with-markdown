@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #testBtn1 {
+            height: 50px;
+            width: 10%;
+            border: 2px solid tomato;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AmCharts Test Page</h1>
+        <button id="testBtn1">Test Button</button>
+    </div>
+
+    <div id="chartdiv" style="width: 900px; height: 800px;"></div>
+    <div id="chartdiv1" style="width: 900px; height: 800px;"></div>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/lodash.js"></script>
+    <script src="//www.amcharts.com/lib/4/core.js"></script>
+    <script src="//www.amcharts.com/lib/4/charts.js"></script>
+    <script>
+
+        // with Object / 이부분을 보고 object 의 구조가 잘 이해 안가면 아래 with Json 을 보면 된다.
+        // Create chart instance
+        let chart = am4core.create("chartdiv", am4charts.PieChart);
+        // chart 라는 변수에 div 요소와 am4charts.PieChart 라는 object 를 인자로 생성된 값을 넣음
+
+        // Create pie series
+        let series = chart.series.push(new am4charts.PieSeries());
+        // chart.series 에 default option 값을 넣는것으로 추측
+
+        series.dataFields.value = "litres";
+        series.dataFields.category = "country";
+
+        // Add data
+        chart.data = [{
+            "country": "Lithuania",
+            "litres": 501.9
+        }, {
+            "country": "Czech Republic",
+            "litres": 301.9
+        }, {
+            "country": "Ireland",
+            "litres": 201.1
+        }, {
+            "country": "Germany",
+            "litres": 165.8
+        }, {
+            "country": "Australia",
+            "litres": 139.9
+        }, {
+            "country": "Austria",
+            "litres": 128.3
+        }, {
+            "country": "UK",
+            "litres": 99
+        }, {
+            "country": "Belgium",
+            "litres": 60
+        }, {
+            "country": "The Netherlands",
+            "litres": 50
+        }];
+
+        // And, for a good measure, let's add a legend
+        chart.legend = new am4charts.Legend();
+
+        // with Json
+        // Create chart instance in one go
+        var chart1 = am4core.createFromConfig({
+        // Create pie series
+        "series": [{
+            "type": "PieSeries",
+            "dataFields": {
+                "value": "litres",
+                "category": "country"
+            }
+        }],
+
+        // Add data
+        "data": [{
+            "country": "Lithuania",
+            "litres": 501.9
+        }, {
+            "country": "Czech Republic",
+            "litres": 301.9
+        }, {
+            "country": "Ireland",
+            "litres": 201.1
+        }, {
+            "country": "Germany",
+            "litres": 165.8
+        }, {
+            "country": "Australia",
+            "litres": 139.9
+        }, {
+            "country": "Austria",
+            "litres": 128.3
+        }, {
+            "country": "UK",
+            "litres": 99
+        }, {
+            "country": "Belgium",
+            "litres": 60
+        }, {
+            "country": "The Netherlands",
+            "litres": 50
+        }],
+
+        // And, for a good measure, let's add a legend
+        "legend": {}
+
+        }, "chartdiv1", am4charts.PieChart);
+    </script>
+</body>
+</html>

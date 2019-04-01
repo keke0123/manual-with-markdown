@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #testBtn1 {
+            height: 50px;
+            width: 10%;
+            border: 2px solid tomato;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AmCharts Test Page</h1>
+        <button id="testBtn1">Test Button</button>
+    </div>
+
+    <div id="chartdiv" style="width: 900px; height: 800px;"></div>
+    <div id="chartdiv1" style="width: 900px; height: 800px;"></div>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/lodash.js"></script>
+    <script src="//www.amcharts.com/lib/4/core.js"></script>
+    <script src="//www.amcharts.com/lib/4/charts.js"></script>
+    <script>
+
+        // with Object / 이부분을 보고 object 의 구조가 잘 이해 안가면 아래 with Json 을 보면 된다.
+        // Create chart instance
+        let chart = am4core.create("chartdiv", am4charts.PieChart);
+
+        // Create pie series
+        let series = chart.series.push(new am4charts.PieSeries());
+        series.dataFields.value = "litres";
+        series.dataFields.category = "country";
+
+        // Add data
+        chart.data = [{
+            "country": "Lithuania",
+            "litres": 501.9
+        }, {
+            "country": "Czech Republic",
+            "litres": 301.9
+        }, {
+            "country": "Ireland",
+            "litres": 201.1
+        }, {
+            "country": "Germany",
+            "litres": 165.8
+        }, {
+            "country": "Australia",
+            "litres": 139.9
+        }, {
+            "country": "Austria",
+            "litres": 128.3
+        }, {
+            "country": "UK",
+            "litres": 99
+        }, {
+            "country": "Belgium",
+            "litres": 60
+        }, {
+            "country": "The Netherlands",
+            "litres": 50
+        }];
+
+        // Let's cut a hole in our Pie chart the size of 40% the radius
+        chart.innerRadius = am4core.percent(70);
+        // 알고 싶으면 10 부터 70 까지 넣어보자 / 안쪽의 공백이 바뀐다.
+
+        // Put a thick white border around each Slice
+        // 테두리선 색
+        series.slices.template.stroke = am4core.color("#4a2abb");
+        // 테두리선 두께
+        series.slices.template.strokeWidth = 2;
+        // 테두리선 투명도
+        series.slices.template.strokeOpacity = 0.7;
+
+        // Disable ticks and labels
+        // label
+        series.labels.template.disabled = true;
+        // label 선
+        series.ticks.template.disabled = true;
+
+        // Set up fills
+        // 기본값으로 추측 / 이걸 안넣어 주면 hover 해서 바뀌었을때 원래대로 돌아가질 않는다.
+        series.slices.template.fillOpacity = 1;  
+        
+        // hover 된 상태의 이벤트 상태 값
+        var hs = series.slices.template.states.getKey("hover");
+        hs.properties.scale = 1;
+        hs.properties.fillOpacity = 0.5;
+
+        // 이런식으로 animation 이 들어간 thema 를 넣어줄수 있지만 생 html은 이런식으로 못넣음
+        // import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+        // // Set theme
+        // am4core.useTheme(am4themes_animated);
+
+        // And, for a good measure, let's add a legend
+        chart.legend = new am4charts.Legend();
+
+    </script>
+</body>
+</html>

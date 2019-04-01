@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #testBtn1 {
+            height: 50px;
+            width: 10%;
+            border: 2px solid tomato;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AmCharts Test Page</h1>
+        <button id="testBtn1">Test Button</button>
+    </div>
+
+    <div id="chartdiv" style="width: 900px; height: 800px;"></div>
+    <div id="chartdiv1" style="width: 900px; height: 800px;"></div>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/lodash.js"></script>
+    <script src="//www.amcharts.com/lib/4/core.js"></script>
+    <script src="//www.amcharts.com/lib/4/charts.js"></script>
+    <script src="//www.amcharts.com/lib/4/themes/animated.js"></script>
+    <script>
+
+        // Set theme    
+        am4core.useTheme(am4themes_animated);
+
+        // Create chart instance
+        var chart = am4core.create("chartdiv", am4charts.PieChart3D);
+
+        // Let's cut a hole in our Pie chart the size of 40% the radius
+        chart.innerRadius = am4core.percent(40);
+
+        // Add data
+        chart.data = [{
+        "country": "Lithuania",
+        "litres": 501.9
+        }, {
+        "country": "Czech Republic",
+        "litres": 301.9
+        }, {
+        "country": "Ireland",
+        "litres": 201.1
+        }, {
+        "country": "Germany",
+        "litres": 165.8
+        }, {
+        "country": "Australia",
+        "litres": 139.9
+        }, {
+        "country": "Austria",
+        "litres": 128.3
+        }, {
+        "country": "UK",
+        "litres": 99
+        }, {
+        "country": "Belgium",
+        "litres": 60
+        }, {
+        "country": "The Netherlands",
+        "litres": 50
+        }];
+
+        // Add and configure Series
+        var pieSeries = chart.series.push(new am4charts.PieSeries3D());
+        pieSeries.dataFields.value = "litres";
+        pieSeries.dataFields.category = "country";
+        pieSeries.slices.template.stroke = am4core.color("#fff");
+        pieSeries.slices.template.strokeWidth = 2;
+        pieSeries.slices.template.strokeOpacity = 1;
+
+        // Disabling labels and ticks on inner circle
+        pieSeries.labels.template.disabled = true;
+        pieSeries.ticks.template.disabled = true;
+
+        // Disable sliding out of slices
+        pieSeries.slices.template.states.getKey("hover").properties.shiftRadius = 0;
+        pieSeries.slices.template.states.getKey("hover").properties.scale = 1.1;
+
+
+    </script>
+</body>
+</html>
