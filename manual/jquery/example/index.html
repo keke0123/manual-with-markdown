@@ -23,7 +23,7 @@
             console.log('clicked')
             $.ajax({
                 type: "POST",
-                url: "http://122.129.251.119:8001/oauth/oauth/token?otpcode=xxxxx",
+                url: "http://122.129.251.120:8001/oauth/oauth/token?otpcode=xxxxx",
                 // dataType: 'json',
                 headers: {
                     // "Authorization": "Basic " + btoa(USERNAME + ":" + PASSWORD)
@@ -34,8 +34,8 @@
                 // '{"username": "' + username + '", "password" : "' + password + '"}',
                 {
                     grant_type: 'password',
-                    username: 'xmerce',
-                    password: 'test',
+                    username: 'lks',
+                    password: '1234',
                     scope: 'client'
                 },
                 success: function (res){
