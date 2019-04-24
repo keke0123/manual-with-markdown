@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container {
+            padding-top: 50px;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="testBtn">test ajax</button>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script>
+        $(document).on('click', '#testBtn', function() {
+            console.log('clicked')
+            $.ajax({
+                type: "POST",
+                url: "http://122.129.251.119:8001/oauth/oauth/token?otpcode=xxxxx",
+                // dataType: 'json',
+                headers: {
+                    // "Authorization": "Basic " + btoa(USERNAME + ":" + PASSWORD)
+                    Authorization: 'Basic Z2lmdGllbDpnaWZ0aWVs'
+                },
+                async: false,
+                data: 
+                // '{"username": "' + username + '", "password" : "' + password + '"}',
+                {
+                    grant_type: 'password',
+                    username: 'xmerce',
+                    password: 'test',
+                    scope: 'client'
+                },
+                success: function (res){
+                    console.log(res);
+                    alert('Thanks for your comment!');
+                }
+            });
+        });
+        
+    </script>
+</body>
+</html>
