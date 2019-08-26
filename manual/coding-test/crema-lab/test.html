@@ -120,47 +120,62 @@
     // q2
 
     // q3
-    function q3(words) {
-        let countArr = new Array(words.length).fill(1);
-        let splitArr = new Array(words.length);
-        for(let i in words) {
-            splitArr[i] = words[i].split('');
-        }
-        let isOk = 0;
-        while(isOk === 0) {
-            isOk = 1;
-            for(let i in splitArr) {
-                for (let j in words) {
-                    let success = 1;
-                    let word = words[j];
-                    for (let index in splitArr[i]) {
-                        let reg = new RegExp(splitArr[i][index]);
-                        if (!reg.test(word)) {
-                            success = 0;
-                            break;
-                        }
-                    }
-                    if (success > 0 && i != j) {
-                        if (countArr[j] < countArr[i] + 1) {
-                            countArr[j] = countArr[i] + 1;
-                            isOk = 0;
-                        }
-                        // console.log('split word', words[i]);
-                        // console.log('word', words[j]);
-                        // console.log('countArr', countArr);
-                    }
-                }
-            }
-        }
-        // console.log('countArr', countArr);
-        let max = countArr.reduce(function(a, b){
-            return Math.max(a, b);
-        });
-        return max;
-        // console.log('max', max);
-    }
-    let words = ['a', 'b', 'ba', 'bca', 'bda', 'bdca'];
-    q3(words);
+    // function q3(words) {
+    //     let countArr = new Array(words.length).fill(1);
+    //     let splitArr = new Array(words.length);
+    //     for(let i in words) {
+    //         splitArr[i] = words[i].split('');
+    //     }
+    //
+    //     for(let i in splitArr) {
+    //         for (let j in words) {
+    //             let success = 1;
+    //             let word = words[j];
+    //             // 시간 초과 잡으려고 생성
+    //             if(countArr[j] != countArr[i]) {
+    //                 continue;
+    //             }
+    //             // 시간 초과 잡으려고 생성
+    //             for (let index in splitArr[i]) {
+    //                 // console.log(splitArr[i]);
+    //                 // console.log(splitArr[i][index]);
+    //                 let reg = new RegExp(splitArr[i][index]);
+    //                 if (!reg.test(word)) {
+    //                     success = 0;
+    //                     break;
+    //                 }
+    //             }
+    //             if (success > 0 && i != j) {
+    //                 if (countArr[j] < countArr[i] + 1) {
+    //                     countArr[j] = countArr[i] + 1;
+    //                 }
+    //                 // console.log('split word', words[i]);
+    //                 // console.log('word', words[j]);
+    //                 // console.log('countArr', countArr);
+    //             }
+    //         }
+    //     }
+    //
+    //     // console.log('countArr', countArr);
+    //     let number = 0;
+    //     for(let index in countArr) {
+    //         // console.log('index', index);
+    //         // console.log('arr[index]', arr[index]);
+    //         if(number < countArr[index]) {
+    //             number = countArr[index];
+    //         }
+    //     }
+    //     // console.log(number);
+    //     return number;
+    //     //
+    //     // let max = countArr.reduce(function(a, b){
+    //     //     return Math.max(a, b);
+    //     // });
+    //     // console.log('max', max);
+    //     // return max;
+    // }
+    // let words = ['a', 'b', 'ba', 'bca', 'bda', 'bdca'];
+    // q3(words);
     // q3
 
 </script>
