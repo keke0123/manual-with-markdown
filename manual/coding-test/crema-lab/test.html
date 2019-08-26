@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-box {
+            width: 80%;
+            height: 30%;
+            border: 1px solid tomato;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content-box">
+
+    </div>
+</div>
+<!-- script -->
+<script>
+    // test
+    // function findNumber(arr, k) {
+    //     console.warn('test');
+    //     let answer = arr.findIndex((number)=>{
+    //         return number === k;
+    //     });
+    //     console.log('answer', answer);
+    // }
+    // let arr = [3,4,1,2,5];
+    // let k = 2;
+    // findNumber(arr, k);
+    // test
+
+    // q1
+    // function q1(k, marks) {
+    //     let max = marks.reduce(function(a, b){
+    //         return Math.max(a, b);
+    //     });
+    //     let count = 0;
+    //     let num = max;
+    //     marks.sort(function(a, b) {
+    //         return b-a;
+    //     });
+    //     for(let index in marks) {
+    //         let item = marks[index];
+    //         if(item <= 0) {
+    //             break;
+    //         }
+    //         // console.log('num', num);
+    //         if(count >= k && item < num) {
+    //             // console.log('index', index);
+    //             // console.log('item', item);
+    //             break;
+    //         }
+    //         count++;
+    //         num = item;
+    //     }
+    //     return count;
+    // }
+    // let k = 4;
+    // let arr = [20, 40, 60, 80, 100];
+    // // let arr = [2,2,3,4,5];
+    // console.log(q1(k, arr));
+    // q1
+
+    // q2
+    // function q2(n, sprints) {
+    //     let arr = new Array(n).fill(0);
+    //     // console.log('arr', arr);
+    //     if(sprints.length <= 2) {
+    //         return 1;
+    //     }
+    //     for(let i=0; i<=sprints.length - 2; i++) {
+    //         let start = sprints[i];
+    //         let end = sprints[i+1];
+    //         if(start > end) {
+    //             [start, end] = [end, start];
+    //         }
+    //         // console.log('start', start);
+    //         // console.log('end', end);
+    //         for(let j=start; j<=end; j++) {
+    //             arr[j-1]++;
+    //         }
+    //     }
+    //
+    //     //
+    //     // console.log('arr', arr);
+    //     // let max = arr.reduce(function(a, b){
+    //     //     return Math.max(a, b);
+    //     // });
+    //     // console.log('max', max);
+    //     // let num = arr.findIndex((number) => number === max);
+    //     // console.log('num', num+1);
+    //     //
+    //     let num = 0;
+    //     let number = 0;
+    //     for(let index in arr) {
+    //         // console.log('index', index);
+    //         // console.log('arr[index]', arr[index]);
+    //         if(number < arr[index]) {
+    //             number = arr[index];
+    //             num = parseInt(index);
+    //         }
+    //     }
+    //     //
+    //     return num+1;
+    // }
+    // let n = 10;
+    // let arr = [1,5,10,3];
+    // q2(n, arr);
+    // q2
+
+    // q3
+    function check(word, words) {
+
+        return 1+check(word, words);
+        // return 0;
+    }
+    function q3(words) {
+        let arr = new Array(words.length).fill(0);
+        for(let index in words) {
+            let word = words[index];
+            let w = word.split('');
+            console.warn('word', word);
+            console.warn('w', w);
+            for(let i in words) {
+                if(index == i) {
+                    continue;
+                }
+                let item = words[i];
+                // console.log('answer', reg.test(item));
+                let ok = 1;
+                for(let r of w) {
+                    let reg = new RegExp(r);
+                    if(!reg.test(item)) {
+                        ok = 0;
+                        break;
+                    }
+                }
+                if(ok == 1) {
+                    console.log('word', word);
+                    console.log('item', item);
+                    arr[i]++;
+                }
+            }
+        }
+        console.log('arr', arr);
+    }
+    let words = ['a', 'b', 'ba', 'bca', 'bda', 'bdca'];
+    q3(words);
+    // q3
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
