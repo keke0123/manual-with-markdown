@@ -178,6 +178,104 @@
     // q3(words);
     // q3
 
+    // q4
+    // check 1~3 까지 돌리고 배열의 숫자를 비교해서 빠진 갯수를 check 하는 방식
+    // 주어진 초에 트렌젝션은 3 이하
+    function check1(array) {
+        let time = 0;
+        let count = 0;
+        for(let i=array.length-1; i>=0; i--) {
+            // console.log(index);
+            if(array[i] !== time) {
+                time = array[i];
+                count = 0;
+            }
+            // console.log('array[i]', array[i]);
+            // console.log('count', count);
+            if(count >= 3) {
+                array.splice(i, 1);
+            }
+            count++;
+        }
+        return array;
+    }
+    // 주어진 10초에 트렌젝션은 20 이하
+    function check2(array) {
+        let minTime = 0;
+        let maxTime = minTime + 9;
+        let count = 0;
+        for(let i=array.length-1; i>=0; i--) {
+            maxTime = array[i];
+            maxTime - 9 >= 0 ? minTime = maxTime - 9 : minTime = 0;
+            count = 0;
+            for(let j = i; j>=0; j--) {
+                // console.warn('count', count, minTime, array[j]);
+                if(array[j] < minTime) {
+                    break;
+                } else if(count > 19) {
+                    // console.log('minTime', minTime);
+                    // console.log('count',count);
+                    // console.log('splice', );
+                    array.splice(i, 1);
+                    break;
+                }
+                count++;
+            }
+        }
+        return array;
+    }
+    // 주어진 1분에 트렌젝션은 60 이하
+    function check3(array) {
+        let minTime = 0;
+        let maxTime = minTime + 59;
+        let count = 0;
+        for(let i=array.length-1; i>=0; i--) {
+            maxTime = array[i];
+            maxTime - 59 >= 0 ? minTime = maxTime - 59 : minTime = 0;
+            count = 0;
+            for(let j = i; j>=0; j--) {
+                // console.warn('count', count, minTime, array[j]);
+                if(array[j] < minTime) {
+                    break;
+                } else if(count > 59) {
+                    // console.log('minTime', minTime);
+                    // console.log('count',count);
+                    // console.log('splice', array.splice(i, 1));
+                    array.splice(i, 1);
+                    break;
+                }
+                count++;
+            }
+        }
+        return array;
+    }
+    function q4(requestTime) {
+        // 원본배열 복사
+        let origin = requestTime.slice();
+        requestTime.sort(function(a, b) {
+            return a-b;
+        });
+        requestTime = check3(requestTime);
+        requestTime = check2(requestTime);
+        requestTime = check1(requestTime);
+        // console.log('requestTime', requestTime);
+        // console.warn('origin', origin);
+        let total = parseInt(origin.length) - parseInt(requestTime.length);
+        // console.warn('answer', total);
+        return total;
+        // let requestTime1 = check1(requestTime.slice());
+        // let requestTime2 = check2(requestTime.slice());
+        // let requestTime3 = check3(requestTime.slice());
+        // let total = parseInt(origin.length) - parseInt(requestTime1.length);
+        // total += parseInt(origin.length) - parseInt(requestTime2.length);
+        // total += parseInt(origin.length) - parseInt(requestTime3.length);
+        // // console.log('answer', total);
+        // return total;
+    }
+    let requestTime = [1,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7];
+    q4(requestTime);
+    // q4
+
 </script>
 </body>
 </html>
