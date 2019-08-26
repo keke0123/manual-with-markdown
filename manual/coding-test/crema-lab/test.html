@@ -120,40 +120,44 @@
     // q2
 
     // q3
-    function check(word, words) {
-
-        return 1+check(word, words);
-        // return 0;
-    }
     function q3(words) {
-        let arr = new Array(words.length).fill(0);
-        for(let index in words) {
-            let word = words[index];
-            let w = word.split('');
-            console.warn('word', word);
-            console.warn('w', w);
-            for(let i in words) {
-                if(index == i) {
-                    continue;
-                }
-                let item = words[i];
-                // console.log('answer', reg.test(item));
-                let ok = 1;
-                for(let r of w) {
-                    let reg = new RegExp(r);
-                    if(!reg.test(item)) {
-                        ok = 0;
-                        break;
+        let countArr = new Array(words.length).fill(1);
+        let splitArr = new Array(words.length);
+        for(let i in words) {
+            splitArr[i] = words[i].split('');
+        }
+        let isOk = 0;
+        while(isOk === 0) {
+            isOk = 1;
+            for(let i in splitArr) {
+                for (let j in words) {
+                    let success = 1;
+                    let word = words[j];
+                    for (let index in splitArr[i]) {
+                        let reg = new RegExp(splitArr[i][index]);
+                        if (!reg.test(word)) {
+                            success = 0;
+                            break;
+                        }
                     }
-                }
-                if(ok == 1) {
-                    console.log('word', word);
-                    console.log('item', item);
-                    arr[i]++;
+                    if (success > 0 && i != j) {
+                        if (countArr[j] < countArr[i] + 1) {
+                            countArr[j] = countArr[i] + 1;
+                            isOk = 0;
+                        }
+                        // console.log('split word', words[i]);
+                        // console.log('word', words[j]);
+                        // console.log('countArr', countArr);
+                    }
                 }
             }
         }
-        console.log('arr', arr);
+        // console.log('countArr', countArr);
+        let max = countArr.reduce(function(a, b){
+            return Math.max(a, b);
+        });
+        return max;
+        // console.log('max', max);
     }
     let words = ['a', 'b', 'ba', 'bca', 'bda', 'bdca'];
     q3(words);
