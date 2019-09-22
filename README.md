@@ -2,6 +2,8 @@
 
 ## 설명서 목록
 
+* Algorithm
+    * ./algorithm/index.html
 * CodingTest
     * ./coding-test/crema-lab
 * MarkDown
