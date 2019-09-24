@@ -70,6 +70,35 @@
     // }
     // solution([4,1,3,2]);
 
+    // 나머지 한점
+    function solution(v) {
+        // var answer = [
+        //     []
+        // ];
+        // console.log('v', v);
+        let result = v.reduce(({x, y}, value, index)=>{
+            // console.log('value', value);
+            if(x === undefined) {
+                x = [value[0]];
+                y = [value[1]];
+            } else {
+                let isBeX = x.findIndex(val => val === value[0]);
+                let isBeY = y.findIndex(val => val === value[1]);
+                isBeX >= 0 ? x.splice(isBeX, 1) : x.push(value[0]);
+                isBeY >= 0 ? y.splice(isBeY, 1) : y.push(value[1]);
+            }
+            console.log('x', x);
+            console.log('y', y);
+            return {x, y};
+        },{});
+        // console.warn(result);
+        let answer = [...result['x'], ...result['y']];
+        console.warn(answer);
+        return answer;
+    }
+    // solution([[1,4], [3,4], [3,10]]);
+    solution([[1, 1], [2, 2], [1, 2]]);
+
 </script>
 </body>
 </html>
