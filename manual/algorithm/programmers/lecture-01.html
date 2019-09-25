@@ -71,33 +71,86 @@
     // solution([4,1,3,2]);
 
     // 나머지 한점
-    function solution(v) {
-        // var answer = [
-        //     []
-        // ];
-        // console.log('v', v);
-        let result = v.reduce(({x, y}, value, index)=>{
+    // function solution(v) {
+    //     let result = v.reduce(({x, y}, value, index)=>{
+    //         // console.log('value', value);
+    //         if(x === undefined) {
+    //             x = [value[0]];
+    //             y = [value[1]];
+    //         } else {
+    //             let isBeX = x.findIndex(val => val === value[0]);
+    //             let isBeY = y.findIndex(val => val === value[1]);
+    //             isBeX >= 0 ? x.splice(isBeX, 1) : x.push(value[0]);
+    //             isBeY >= 0 ? y.splice(isBeY, 1) : y.push(value[1]);
+    //         }
+    //         console.log('x', x);
+    //         console.log('y', y);
+    //         return {x, y};
+    //     },{});
+    //     // console.warn(result);
+    //     let answer = [...result['x'], ...result['y']];
+    //     console.warn(answer);
+    //     return answer;
+    // }
+    // solution([[1, 1], [2, 2], [1, 2]]);
+
+    // 가장 큰 정사각형 찾기
+    function solution(board)
+    {
+        /*
+            1. (0,1), (0,2), (0,3) 이런 순으로 값이 1인 x, y 좌표를 찾는다.
+            2. 1인 좌표를 찾으면 x.length - 1 / y.length - 1 보다 작을때 1이 이어지는지 확인한다.
+            3. 정사각형의 크기를 result 배열에 넣는다.
+            4. for 문을 전부 돌고 result 의 값중 제일 큰 값을 return 한다.
+        */
+        // console.log('square');
+        let result = board.reduce(({result}, value, index, array) => {
+            // console.log('index', index);
+            // console.log('result', result);
             // console.log('value', value);
-            if(x === undefined) {
-                x = [value[0]];
-                y = [value[1]];
-            } else {
-                let isBeX = x.findIndex(val => val === value[0]);
-                let isBeY = y.findIndex(val => val === value[1]);
-                isBeX >= 0 ? x.splice(isBeX, 1) : x.push(value[0]);
-                isBeY >= 0 ? y.splice(isBeY, 1) : y.push(value[1]);
+            // console.log('array', array);
+            for(let i=0; i<value.length; i++){
+                if(value[i] === 1) {
+                    // console.log('insert i', i);
+                    let countX = 0;
+                    let countY = 0;
+                    // x
+                    for(let j=i; j<value.length; j++) {
+                        // console.log('x', value[j]);
+                        if(value[j] === 0) {
+                            break;
+                        }
+                        countX++;
+                    }
+                    // y
+                    for(let j=index; j<array.length; j++) {
+                        // console.log('x : y', j, i);
+                        // console.log('y', array[j][i]);
+                        // console.log('index', index);
+                        if(array[j][i] === 0) {
+                            break;
+                        }
+                        countY++;
+                    }
+                    // console.log('countX : count Y', countX, countY);
+                    let area = countX > countY ? countY*countY : countX*countX;
+                    // console.log('area', area);
+                    result.push(area);
+                }
             }
-            console.log('x', x);
-            console.log('y', y);
-            return {x, y};
-        },{});
-        // console.warn(result);
-        let answer = [...result['x'], ...result['y']];
-        console.warn(answer);
+            return {
+                result
+            };
+        }, {
+            result: [],
+        });
+        // console.warn('result', result);
+        let answer = Math.max(...result.result);
+        // console.log('answer', answer);
         return answer;
     }
-    // solution([[1,4], [3,4], [3,10]]);
-    solution([[1, 1], [2, 2], [1, 2]]);
+    solution([[0,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,1,0]]); // 9
+    // solution([[0,0,1,1],[1,1,1,1]]); // 4
 
 </script>
 </body>
