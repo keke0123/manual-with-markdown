@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>알고리즘</title>
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-box {
+            width: 80%;
+            height: 30%;
+            border: 1px solid tomato;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content-box">
+        <button class="testBtn">test</button>
+    </div>
+</div>
+<!-- script -->
+<script>
+    document.querySelector('.testBtn').addEventListener('click', () => {
+        console.log('clicked');
+    });
+
+    // 마라톤 / 효율성 실패
+    function solution(participant, completion) {
+        var answer = '';
+        for(let i=participant.length-1; i>=0; i--) {
+            // console.log(participant[i]);
+            let index = completion.findIndex(name => participant[i] === name);
+            // console.log('index', index);
+            if(index < 0) {
+                answer = participant[i];
+                break;
+            }
+            completion.splice(index, 1);
+        }
+        // console.log('answer', answer);
+        return answer;
+    }
+    solution(['leo', 'kiki', 'eden'], ['eden', 'kiki']); // 'leo'
+
+    // 체육복 도난 / 테스트 한개 실패
+    function solution(n, lost, reserve) {
+        let answer = 0;
+        // for(let j=reserve.length-1; j>=0; j--) {
+        //     let i = lost.findIndex
+        // }
+        reserve.forEach((value, index) => {
+            // console.log(value);
+            let i = lost.findIndex((val) => val == value);
+            if(i >= 0) {
+                lost.splice(i,1);
+            } else {
+                i = lost.findIndex((val) => (val == value-1) || (val == value+1));
+                if(i>=0) {
+                    lost.splice(i, 1);
+                }
+            }
+        });
+        answer = n - lost.length;
+        // console.log(answer);
+        return answer;
+    }
+    // solution(5, [2,4], [1,3,5]); // 5
+    // 체육복 도난
+    // function solution(n, lost, reserve) {
+    //     let answer = 0;
+    //     for(let j=reserve.length-1; j>=0; j--) {
+    //         console.log('j', reserve[j]);
+    //         let i = lost.findIndex((val) => val==reserve[j]);
+    //         if(i >= 0) {
+    //             lost.splice(i,1);
+    //             reserve.splice(j,1);
+    //         } else {
+    //             i = lost.findIndex((val) => (val == reserve[j]-1) || (val == reserve[j]+1));
+    //             if(i>=0) {
+    //                 lost.splice(i, 1);
+    //                 reserve.splice(j, 1);
+    //             }
+    //         }
+    //     }
+    //     answer = n - lost.length;
+    //     // console.log(answer);
+    //     return answer;
+    // }
+    // solution(5, [2,4], [1,3,5]); // 5
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
