@@ -276,17 +276,74 @@
 
     // 땅따먹기
     /*
-
+        {before(or idx): number, value: number} 이걸로 쭉 더하는 알고리즘 만들어 보자
+        가공되서 만들어진 배열을 바탕으로 더해서 배열에 넣고 (이 배열을 a라 하면)
+        다음 배열과 a 배열을 또 더해서 (배열 b 를 만든다)
     */
     function solution(land) {
         var answer = 0;
-        let result = land.reduce(({result}, value, index, array) => {
-            
+        let array = selectNum(land);
+        // console.log('가공된 배열', array);
+        let result = array.reduce(({array}, value, index) => {
+            // console.log('array', array);
+            if(index === 0) return { array: value };
+            let newArray = [];
+            array.forEach((val) => {
+                // console.log('val', val);
+                value.forEach((v) => {
+                    if(val.idx !== v.idx) {
+                        newArray.push({idx: v.idx, value: v.value + val.value});
+                    }
+                });
+            });
+            // console.log('newArray', newArray);
+            return { array: newArray };
         }, {
-            result: [],
+            array: [],
         });
-
+        // console.warn('answer', result.array);
+        answer = searchMax(result.array, 'value');
+        // console.warn('answer', answer);
         return answer;
+    }
+    // 배열을 받아서 첫번째로 큰 값과 두번째로 큰값을 idx 값을 담고 있는 object 로 만들어서 리턴
+    // ex) [{idx: number, value: number}, {idx: number, value: number}]
+    function selectNum(array){
+        // console.log('before', array);
+        let result = array.reduce(({array}, value, index) => {
+            let init = {idx: -1, value: 0};
+            let first = Object.assign({}, init);
+            let second = Object.assign({}, init);
+            value.forEach((val, idx) => {
+                if(val > second.value) {
+                    second.value = val;
+                    second.idx = idx;
+                    if(second.value > first.value) {
+                        [first.value, second.value] = [second.value, first.value];
+                        [first.idx, second.idx] = [second.idx, first.idx];
+                    }
+                }
+            });
+            let col = [first, second];
+            array.push(col);
+            return {
+                array
+            }
+        }, {
+            array: []
+        });
+        // console.log('after', result);
+        return result.array;
+    }
+    // array 안 object 의 키값을 바탕으로 max 값 찾아서 return 하기
+    function searchMax(array, key) {
+        let first = 0;
+        array.forEach((value, index) => {
+            if(value[key] > first) {
+                first = value[key];
+            }
+        });
+        return first;
     }
     solution([[1,2,3,5],[5,6,7,8],[4,3,2,1]]); // 16
 
