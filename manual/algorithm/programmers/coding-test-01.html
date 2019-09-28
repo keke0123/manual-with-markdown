@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>코딩테스트</title>
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-box {
+            width: 80%;
+            height: 30%;
+            border: 1px solid tomato;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content-box">
+        <button class="testBtn">test</button>
+    </div>
+</div>
+<!-- script -->
+<script>
+    document.querySelector('.testBtn').addEventListener('click', () => {
+        console.log('clicked');
+    });
+
+    // 상자에 담기 / 68 점
+    /*
+        가장 큰 상품을 가장 큰 상자에 담는 방법으로, 상품과 박스는 제거
+    */
+    // function solution(goods, boxes){
+    //     goods.sort();
+    //     boxes.sort();
+    //     let count = 0;
+    //     console.log(goods);
+    //     console.log(boxes);
+    //     // if(goods[0] > boxes[boxes.length-1]) {
+    //     //     return count;
+    //     // }
+    //     for(let i=0; i<goods.length; i++) {
+    //         for(let j=0; j<boxes.length; j++) {
+    //             if(goods[i] <= boxes[j]) {
+    //                 count++;
+    //                 boxes.splice(j,1);
+    //                 // boxes[j]=0;
+    //                 break;
+    //             }
+    //         }
+    //     }
+    //     return count;
+    // }
+    // // solution([5,3,7],[3,7,6]);
+    // solution([3,8,6],[5,6,4]);
+
+    // 체스 : 비숍 / 100 점
+    /*
+        풀이 구상
+        체스판은 0, 1 로 이루어진 이중 배열
+        말을 둘수 있는 곳은 0으로 된곳에 둘수 있고 마지막에 배열에서 0을 count 해서 출력
+        영어 A ~ H 까지 1부터 8까지로 or 0부터 7까지로 정의
+        x + n = y / x + y = n 두식을 만족하는 곳을 1로 바꿈
+        변수는 x, y, n / n은 처음 입력받은 값으로 계산
+    */
+    // function solution(bishops) {
+    //     var answer = 0;
+    //     let myBishops = changeArray(bishops);
+    //     // let array = new Array(8).fill(new Array(8).fill(0));
+    //     let array = new Array(8);
+    //     for(let i=0; i<8; i++) {
+    //         array[i] = new Array(8).fill(0);
+    //     }
+    //     // console.log('myBishops', myBishops);
+    //     for(let i=1; i<9; i++) {
+    //         for(let j=1; j<9; j++) {
+    //             for(let k=0; k<myBishops.length; k++) {
+    //                 if(j - i === myBishops[k].n1 || i+j === myBishops[k].n2) {
+    //                     array[i-1][j-1] = 1;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     let count = 0;
+    //     for(let i=0; i<8; i++) {
+    //         for(let j=0; j<8; j++) {
+    //             if(array[i][j] === 0) {
+    //                 count++;
+    //             }
+    //         }
+    //     }
+    //
+    //     // console.warn('array', array);
+    //     // console.warn('count', count);
+    //     return count;
+    // }
+    // let word = {A:1, B:2, C:3, D:4, E:5, F:6, G:7, H:8};
+    // function changeArray(array) {
+    //     let result = [];
+    //     array.forEach((value) => {
+    //         let str = value.split("");
+    //         let tempObject = {
+    //             x: word[str[0]],
+    //             y: parseInt(str[1]),
+    //             // n1: Math.abs(parseInt(str[1]) - word[str[0]]),
+    //             n1: parseInt(str[1]) - word[str[0]],
+    //             n2: word[str[0]] + parseInt(str[1])
+    //         };
+    //         // console.log(tempObject);
+    //         result.push(tempObject);
+    //     });
+    //     // console.log(result);
+    //     return result;
+    // }
+    // // solution(["D5"]);
+    // solution(["D5", "E8", "G2"]);
+
+    // 스티커
+    /*
+        index 값을 갖는 object 형태로 만든다음에 작은 순서로 정렬,
+        마지막 순서부터 for문을 돌면서 앞의 숫자가 더 작으면
+        앞에 숫자를 지우고 아니면 지금 숫자를 지운다.
+        예외) 앞뒤 두개의 합이 가운데의 값보다 크면 지워도 되나?
+    */
+    // function solution(sticker) {
+    //     var answer = 0;
+    //     let array = changeArray(sticker);
+    //     // console.log(array);
+    //     let idxArray = [];
+    //     for(let i=array.length-1; i>=0; i--) {
+    //         let isBe = false;
+    //         for(let j=0; j<idxArray.length; j++) {
+    //             if(idxArray[j]+1 === array[i].idx || idxArray[j]-1 === array[i].idx) {
+    //                 isBe = true;
+    //                 break;
+    //             }
+    //         }
+    //         if(isBe === false) {
+    //             // console.log('+1, -1', sticker[array[i].idx-1], sticker[array[i].idx+1]);
+    //             let up = sticker[array[i].idx+1] || 0;
+    //             let down = sticker[array[i].idx-1] || 0;
+    //             if(array[i].value >= up+down){
+    //                 answer = answer + array[i].value;
+    //                 idxArray.push(array[i].idx);
+    //             }
+    //         }
+    //     }
+    //     // console.warn('answer', answer);
+    //     // console.warn('idxArray', idxArray);
+    //
+    //     return answer;
+    // }
+    // function changeArray(array) {
+    //     let changedArray = [];
+    //     for(let i=0; i<array.length; i++) {
+    //         // console.log(array[i]);
+    //         let tempObject = {idx: i, value: array[i]};
+    //         changedArray.push(tempObject);
+    //     }
+    //     // console.log(changedArray);
+    //     array = sorting(changedArray, 'value');
+    //     return array;
+    // }
+    // function sorting(array, key) {
+    //     array = array.sort((a, b) => {
+    //         // console.log('a', a);
+    //         // console.log('b', b);
+    //         return a[key] - b[key];
+    //     });
+    //     // console.log(array);
+    //     return array;
+    // }
+    // solution([12,80,14,22,100]) // 180
+
+    // 스티커
+    /*
+        홀수 짝수로 구분해서 베이스로 삼고 다시 계산을 돌려야 된다.
+    */
+    function solution(sticker) {
+        var answer = 0;
+        let odd = 0;
+        let oddArray = [];
+        let even = 0;
+        let evenArray = [];
+        let choice = 0;
+        sticker.forEach((value, index) => {
+            // index % 2 === 0 ? odd++ : even++;
+            // console.log('index odd even', index, odd, even);
+            if(index % 2 === 0) {
+                odd = odd + value;
+                oddArray.push(index);
+            } else {
+                even = even + value;
+                evenArray.push(index);
+            }
+        });
+        choice = odd > even ? 0 : 1;
+
+
+        console.log(choice);
+
+
+
+        return answer;
+    }
+    solution([12,80,14,22,100]) // 180
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
