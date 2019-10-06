@@ -2,6 +2,8 @@
 
 ## 설명서 목록
 
+* Design pattern
+    * ./design-pattern/index.html
 * Algorithm
     * ./algorithm/index.html
 * CodingTest
