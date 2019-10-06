@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>옵저버 패턴</title>
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-box {
+            width: 80%;
+            height: 30%;
+            border: 1px solid tomato;
+        }
+    </style>
+</head>
+<body id="container">
+<div class="container">
+    <div class="content-box">
+        <button class="testBtn">test</button>
+    </div>
+</div>
+<!-- script -->
+<script>
+    document.querySelector('.testBtn').addEventListener('click', () => {
+        console.log('clicked');
+    });
+
+    let observer = {
+        // 각 모듈에서 등록할 핸들러들을 담아둘 내부 변수를 선언 / 아마 실사용한다면 이건 싱글톤으로 해야 맞을듯하다.
+        handlers: {},
+        // 상태 변화 이벤트가 발생하면 실행될 이벤트를 등록하는 함수를 작성한다.
+        // 핸들러 등록시 context를 함께 전달받아
+        // 내부에서 this를 사용시 적절한 컨텍스트에서 실행될 수 있도록 한다. / 이건 무슨말이지?
+        register: function(eventName, handler, context) {
+            // 해당 이벤트로 기존에 등록된 이벤트들이 있는지 확인한다.
+            let handlerArray = this.handlers[eventName];
+            if(undefined === handlerArray) {
+                // 신규 이벤트라면 새로운 배열을 할당한다.
+                // 핸들러를 바로 넣지 않고 배열을 할당하는 이유는
+                // 한 이벤트에 여러개의 핸들러를 등록할 수 있도록 하기 위함
+                handlerArray = this.handlers[eventName] = [];
+            }
+            // 전달받은 핸들러와 컨텍스트를 해당 이벤트의 핸들러배열에 추가한다.
+            handlerArray.push({
+                handler: handler,
+                context: context
+            })
+        },
+        // 등록된 핸들러를 해제하는 함수를 작성
+        unregister: function(eventName, handler, context) {
+            let handlerArray = this.handlers[eventName];
+            if(undefined === handlerArray) return ;
+            // 삭제할 핸들러와 컨텍스트를 배열에서 찾는다.
+            for(let hidx=0; hidx<handlerArray.length; hidx++) {
+                let currentHandler = handlerArray[hidx];
+                // 찾았다면 배열에서 삭제하고 함수를 종료
+                if(handler === currentHandler['handler']
+                    && context === currentHandler['context']) {
+                    handlerArray.splice(hidx, 1);
+                    return ;
+                }
+            }
+        },
+        // 특정 상태가 변했을때 이벤트를 통보할 함수를 작성한다.
+        notify: function(eventName, data) {
+            // 통보된 이벤트에 등록된 핸들러가 있는지 확인한다.
+            let handlerArray = this.handlers[eventName];
+            if(undefined === handlerArray) return ; // 없으면 리턴
+            // 핸들러 배열에 등록되어있는 핸들러들을 하나씩 꺼내 전달받은 데이터와 함께 호출
+            for(let hidx=0; hidx<handlerArray.length; hidx++) {
+                let currentHandler = handlerArray[hidx];
+                // call 로 함수를 호출하면 this 를 묶어 줄수 있다.
+                currentHandler['handler'].call(currentHandler['context'], data);
+                // 전달받은 함수를 바로 호출하지 않고 call 을 사용하여 호출하는 이유는
+                // 미리 등록시 함께 전달된 context 객체를 함수내부에서 this로 사용할 수 있게끔
+                // 함수 내부로 전달하기 위함
+                // 자바스크립트에서 this를 사용할때는 상당히 주의해야 된다.
+            }
+        }
+    } // observer 객체
+
+    function Person() {
+        return {};
+    }
+
+    // onload 이벤트는 querySelector 로는 받아올수 없는 함수...
+    // id 값은 getElementById 로 뽑아오는걸 습관들이자.
+    document.getElementById('container').onload = function(){
+        console.log('document onload');
+
+        // 옵저버(Observer) 활용
+        let boss = new Person();
+        let manager = new Person();
+        let programmer = new Person();
+        // console.log(boss);
+        boss.speak = function(comment) {
+            alert(comment);
+            observer.notify('bossSpeak', comment);
+        }
+        manager.listen = function(comment) {
+            this.bossComment = comment;
+        }
+        observer.register('bossSpeak', manager.listen, manager);
+        programmer.drop = function(comment) {
+            return comment;
+        }
+        observer.register('bossSpeak', programmer.drop, programmer);
+        boss.speak('... for an hour ...');
+        console.log('manager', manager);
+        console.log('programmer', programmer);
+        // 개인적으로 event 와 observer 의 차이를 잘 모르겠다.
+    }
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
