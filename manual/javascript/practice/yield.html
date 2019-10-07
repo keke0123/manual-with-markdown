@@ -56,13 +56,17 @@
         console.log('arguments', arguments);
         yield* [1, 2];
         yield* "34";
-        yield "123123";
+        // yield "123123";
         // yield* Array.from(value);
         yield* Array.from(arguments);
     }
-
     iterator = g3(5, 6);
 
+    // for(let item of iterator) {
+    //     // console.log('key', key);
+    //     console.log('item', item);
+    // }
+    console.log('iterator',iterator.length);
     console.log(iterator.next()); // { value: 1, done: false }
     console.log(iterator.next()); // { value: 2, done: false }
     console.log(iterator.next()); // { value: "3", done: false }
@@ -70,6 +74,7 @@
     console.log(iterator.next()); // { value: 5, done: false }
     console.log(iterator.next()); // { value: 6, done: false }
     console.log(iterator.next()); // { value: undefined, done: true }
+
 
     function test() {
         // arguments 는 prototype 인가? 그냥 생겨있네?
