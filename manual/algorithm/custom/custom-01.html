@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>알고리즘</title>
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-box {
+            width: 80%;
+            height: 30%;
+            border: 1px solid tomato;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content-box">
+        <button class="testBtn">test</button>
+    </div>
+</div>
+<!-- script -->
+<script>
+    document.querySelector('.testBtn').addEventListener('click', () => {
+        console.log('clicked');
+    });
+
+    // function prepend(value, object) {
+    //     return {
+    //         value,
+    //         rest: object
+    //     }
+    // }
+    // console.log(prepend(10, prepend(20, null)))
+
+    // function deepEqual(obj1, obj2) {
+    //     // console.log('type', typeof obj1, typeof obj2);
+    //     return JSON.stringify(obj1) === JSON.stringify(obj2);
+    // }
+    // let obj = {here: {is: "an"}, object: 2};
+    //
+    // console.log(deepEqual(obj, obj));
+    // console.log(deepEqual(obj, {here: {is: "an"}, object: 2}));
+    // console.log(deepEqual(obj, {object: 2, here: {is: "an"}}));
+
+    let count = 0;
+    function findSolution(target) {
+        function find(current, history) {
+            count++;
+            if(current == target) {
+                return history;
+            } else if(current > target) {
+                return null;
+            } else {
+                return find(current + 5, `(${history} + 5)`) ||
+                        find(current * 3, `(${history} * 3)`);
+            }
+        }
+        return find(1, "1");
+    }
+    console.log(findSolution(24));
+    console.log('count', count);
+
+    // 아래 처럼 하고 find(5, "5"); 를 하면 5+5+5 랑 5*3 두개가 나올줄 알았는데
+    // 5+5+5 만 나온다. +5 식이랑 *3 을 바꾸면 5*3 만 나온다.
+    // console.log(findSolution(15));
+    // console.log('count', count);
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
