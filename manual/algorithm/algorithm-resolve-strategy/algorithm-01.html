@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>algorithm-01</title>
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-box {
+            width: 80%;
+            height: 30%;
+            border: 1px solid tomato;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content-box">
+        <button class="testBtn">test</button>
+    </div>
+</div>
+<!-- script -->
+<script>
+    document.querySelector('.testBtn').addEventListener('click', () => {
+        console.log('clicked');
+    });
+
+    // 삽입정렬
+    var insertionSort = function(array) {
+        var i = 1, j, temp;
+        for (i; i < array.length; i++) {
+            temp = array[i]; // 새로운 숫자를 선택함
+            for (j = i - 1; j >= 0 && temp < array[j]; j--) { // 선택한 숫자를 이미 정렬된 숫자들과 비교하며 넣을 위치를 찾는 과정, 선택한 숫자가 정렬된 숫자보다 작으면
+                array[j + 1] = array[j]; // 한 칸씩 뒤로 밀어낸다
+            }
+            console.log('i', i);
+            console.log('array[i]', array[i]);
+            console.log('j', j); // 끝까지 실행되면 j 는 -1 이 된다.
+            console.log('array[j]', array[j]);
+            console.log('array[j+1]', array[j+1]);
+            console.log('array[j+2]', array[j+2]);
+            array[j + 1] = temp; // 마지막 빈 칸에 선택한 숫자를 넣어준다.
+        }
+        return array;
+    };
+    console.log(insertionSort([5, 6, 1, 2, 4, 3])); // [1, 2, 3, 4, 5, 6]
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
