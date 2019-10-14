@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>알고리즘</title>
+    <style>
+        .container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-box {
+            width: 80%;
+            height: 30%;
+            border: 1px solid tomato;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content-box">
+        <button class="testBtn">test</button>
+    </div>
+</div>
+<!-- script -->
+<script>
+    document.querySelector('.testBtn').addEventListener('click', () => {
+        console.log('clicked');
+        let test = new testPrototype();
+        test.test02();
+    });
+
+    let testPrototype = function() {}
+
+    testPrototype.prototype.test01 = 3;
+    testPrototype.prototype.test02 = function() {
+        this.test01++;
+        console.log('test01',this.test01);
+        test.singleton.getInstance().getData();
+    }
+
+    // 싱글톤 패턴 사용 / 한번은 바로 실행되는데?
+    testPrototype.prototype.singleton = (function(){
+        let instance;
+        function init() {
+            let data = 1;
+            return {
+                getData: function() {
+                    console.log(data);
+                    return ++data;
+                }
+            }
+        }
+        return {
+            getInstance: function() {
+                if(instance == null) {
+                    instance = init();
+                }
+                return instance;
+            }
+        }
+    })();
+
+    let test = new testPrototype();
+    test.test02();
+    // test.singleton.getInstance().getData();
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
