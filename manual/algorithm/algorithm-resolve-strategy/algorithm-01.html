@@ -89,17 +89,43 @@
     // solve([5,1,7,4,6,3,2,8]);
     
     // 선택정렬
-    function solve(array) {
-        for(let i=0; i<array.length; i++) {
-            let idx = i;
-            for(let j=i+1; j<array.length; j++) {
-                idx = array[j]<array[idx] ? j : idx;
+    // function solve(array) {
+    //     for(let i=0; i<array.length; i++) {
+    //         let idx = i;
+    //         for(let j=i+1; j<array.length; j++) {
+    //             idx = array[j]<array[idx] ? j : idx;
+    //         }
+    //         [array[i], array[idx]] = [array[idx], array[i]];
+    //     }
+    //     console.log('array', array);
+    // }
+    // solve([5,1,4,7,2,6,8,3]);
+
+    // 퀵정렬
+    function quick(array) {
+        if(array.length < 2) return array;
+        let idx_left = 0;
+        let idx_right = array.length-2;
+        let standard = array[array.length-1];
+        while(idx_left < idx_right) {
+            if(standard < array[idx_left] && standard > array[idx_right]) {
+                [array[idx_left], array[idx_right]] = [array[idx_right], array[idx_left]];
             }
-            [array[i], array[idx]] = [array[idx], array[i]];
+            idx_left = standard > array[idx_left] ? idx_left+1 : idx_left;
+            if(idx_left === idx_right) break;
+            idx_right = standard < array[idx_right] ? idx_right-1 : idx_right;
         }
-        console.log('array', array);
+        idx_left = array[idx_left] > standard ? idx_left : idx_left+1;
+        [array[idx_left], array[array.length-1]] = [array[array.length-1], array[idx_left]];
+        let array_left = quick(array.splice(0, idx_left));
+        let array_right = quick(array.splice(1, array.length));
+        return [...array_left, ...array, ...array_right];
     }
-    solve([5,1,4,7,2,6,8,3]);
+    function solve(array) {
+        let result = quick(array);
+        console.log('result', result);
+    }
+    solve([4,1,7,6,3,8,2,5]);
 
 
 </script>
