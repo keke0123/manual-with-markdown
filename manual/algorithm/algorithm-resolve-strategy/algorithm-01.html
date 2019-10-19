@@ -87,6 +87,19 @@
     //     console.log(array);
     // }
     // solve([5,1,7,4,6,3,2,8]);
+    
+    // 선택정렬
+    function solve(array) {
+        for(let i=0; i<array.length; i++) {
+            let idx = i;
+            for(let j=i+1; j<array.length; j++) {
+                idx = array[j]<array[idx] ? j : idx;
+            }
+            [array[i], array[idx]] = [array[idx], array[i]];
+        }
+        console.log('array', array);
+    }
+    solve([5,1,4,7,2,6,8,3]);
 
 
 </script>
