@@ -112,14 +112,17 @@
                 [array[idx_left], array[idx_right]] = [array[idx_right], array[idx_left]];
             }
             idx_left = standard > array[idx_left] ? idx_left+1 : idx_left;
-            if(idx_left === idx_right) break;
+            // if(idx_left === idx_right) break;
             idx_right = standard < array[idx_right] ? idx_right-1 : idx_right;
         }
         idx_left = array[idx_left] > standard ? idx_left : idx_left+1;
         [array[idx_left], array[array.length-1]] = [array[array.length-1], array[idx_left]];
-        let array_left = quick(array.splice(0, idx_left));
-        let array_right = quick(array.splice(1, array.length));
-        return [...array_left, ...array, ...array_right];
+        // let array_left = quick(array.splice(0, idx_left));
+        // let array_right = quick(array.splice(1, array.length));
+        let array_left = quick(array.slice(0, idx_left));
+        let array_right = quick(array.slice(idx_left+1, array.length));
+        let array_mid = array.slice(idx_left, idx_left+1);
+        return [...array_left, ...array_mid, ...array_right];
     }
     function solve(array) {
         let result = quick(array);
