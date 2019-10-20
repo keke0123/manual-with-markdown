@@ -131,36 +131,64 @@
     // solve([4,1,7,6,3,8,2,5]);
 
     // 계수정렬
-    function count(array, num) {
-        let array_count = new Array(num).fill(0);
-        // console.log('array, array_count', array, array_count);
-        for(let value of array) {
-            // console.log('value', value);
-            array_count[value]++;
+    // function count(array, num) {
+    //     let array_count = new Array(num).fill(0);
+    //     // console.log('array, array_count', array, array_count);
+    //     for(let value of array) {
+    //         // console.log('value', value);
+    //         array_count[value]++;
+    //     }
+    //     for(let i=1; i<array_count.length; i++) {
+    //         array_count[i] = array_count[i-1] + array_count[i];
+    //     }
+    //     // console.log('array, array_count', array, array_count);
+    //     return array_count;
+    // }
+    // function sort(array_count) {
+    //     let result = [];
+    //     for(let i=0, j=0; i<array_count[array_count.length-1]; i++) {
+    //         // console.log('i, j', i, j);
+    //         if(array_count[j]-1 < i) {
+    //             j++;
+    //         }
+    //         result.push(j);
+    //     }
+    //     console.log('result', result);
+    //     return result;
+    // }
+    // function solve(array, num) {
+    //     let array_count = count(array, num);
+    //     sort(array_count);
+    // }
+    // solve([3,4,0,1,2,4,2,4], 5);
+
+    // 기수정렬
+    function sort(array, idx, n) {
+        // console.log('sort');
+        if(idx > n) return array;
+        let divider = idx;
+        let array_store = new Array(10);
+        for(let i=0; i<array_store.length; i++) {
+            array_store[i] = [];
         }
-        for(let i=1; i<array_count.length; i++) {
-            array_count[i] = array_count[i-1] + array_count[i];
+        for(let i=0; i<array.length; i++) {
+            let digitNum = Math.floor((array[i]/divider)%10);
+            array_store[digitNum].push(array[i]);
         }
-        // console.log('array, array_count', array, array_count);
-        return array_count;
+        array = [];
+        for(let i=0; i<array_store.length; i++) {
+            while(array_store[i].length) {
+                array.push(array_store[i].shift());
+            } 
+        }
+        // console.log('array_store', array_store);
+        return sort(array, idx*10, n);
     }
-    function sort(array_count) {
-        let result = [];
-        for(let i=0, j=0; i<array_count[array_count.length-1]; i++) {
-            // console.log('i, j', i, j);
-            if(array_count[j]-1 < i) {
-                j++;
-            }
-            result.push(j);
-        }
+    function solve(array, n) {
+        let result = sort(array, 1, Math.pow(10, n));
         console.log('result', result);
-        return result;
     }
-    function solve(array, num) {
-        let array_count = count(array, num);
-        sort(array_count);
-    }
-    solve([3,4,0,1,2,4,2,4], 5);
+    solve([125,383,274,96,0,9,81,72], 3);
 
 
 </script>
