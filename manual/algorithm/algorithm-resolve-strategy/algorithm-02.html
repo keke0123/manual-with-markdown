@@ -34,26 +34,71 @@
     // linked list
     let LinkedList = (function() {
         function LinkedList() {
-            console.log('init');
+            // console.log('init');
             this.length = 0;
             this.head = null;
         }
         function Node(data) {
-            console.log('node');
+            // console.log('node');
             this.data = data;
             this.next = null;
         }
         LinkedList.prototype.add = function(value) {
-            console.log('add');
+            // console.log('add');
             let node = new Node(value);
-            console.log('node', node);
-            console.log('this', this);
-            this.length = value;
+            this.length++;
+            if(this.head == null) {
+                this.head = node;
+                return node;
+            }
+            let this_node = this.head;
+            while(this_node.next) {this_node = this_node.next};
+            this_node.next = node;
+            return this_node;
+        }
+        LinkedList.prototype.search = function(num) {
+            // console.log('search');
+            if(num+1 >= this.length) return null;
+            let index = 0;
+            let this_node = this.head;
+            while(index != num) {
+                this_node = this_node.next;
+                index++;
+            }
+            return this_node;
+        }
+        LinkedList.prototype.remove = function(num) {
+            // console.log('remove');
+            if(num+1 > this.length) return null;
+            let index = 0;
+            let this_node = this.head;
+            let before_node = null;
+            while(index != num) {
+                before_node = this_node;
+                this_node = this_node.next;
+                index++;
+            }
+            let removed = Object.assign({}, this_node);
+            console.warn('test', before_node);
+            if(this_node.next == null) {
+                before_node.next = null;
+            } else {
+                before_node.next = this_node.next;
+            }
+            this.length--;
+            return removed;
         }
         return LinkedList;
     })();
     let list = new LinkedList();
-    list.add(123);
+    list.add(1);
+    list.add(2);
+    list.add(3);
+    list.add(4);
+    // console.log('add', list.add(123));
+    console.log('list', list);
+    console.log('search', list.search(1));
+    console.log('remove', list.remove(2));
     console.log('list', list);
 
 
